@@ -2,9 +2,10 @@ package states.stages;
 
 import states.stages.objects.*;
 import cutscenes.DialogueBox;
-import shaders.WiggleEffect.WiggleEffectType;
+import shaders.WiggleEffect;
 import objects.Note;
 import backend.Achievements.AchievementObject;
+import openfl.filters.ShaderFilter;
 
 class PsychicStage extends BaseStage
 {
@@ -31,6 +32,28 @@ class PsychicStage extends BaseStage
 
 	var startedCountdown:Bool = false;
 	var limoSpeed:Float = 0;
+
+	private var timeBarBG:AttachedSprite;
+
+	public var timeBar:FlxBar;
+
+	public var endingSong:Bool = false;
+
+	private var notes:FlxTypedGroup<Note>;
+	private var unspawnNotes:Array<Note> = [];
+	private var psychicNotes:Array<Dynamic> = [];
+
+	var finishTimer:FlxTimer = null;
+
+	var wiggleShit:WiggleEffect = new WiggleEffect();
+
+	var frontFakeBf:FlxSprite;
+	var fakeBf:FlxSprite;
+	var psychicBlack:FlxSprite;
+
+	// Handles the new epic mega sexy cam code that i've done
+	private var camFollow:FlxPoint;
+	private var camFollowPos:FlxObject;
 
 	override function create()
 	{
@@ -203,7 +226,7 @@ class PsychicStage extends BaseStage
 	}
 
 	var transitioning = false;
-	function endSong():Void
+	override function endSong():Void
 	{
 		timeBarBG.visible = false;
 		timeBar.visible = false;
