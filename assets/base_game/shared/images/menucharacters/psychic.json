@@ -1,0 +1,12 @@
+{
+	
+	"image": "Menu_Psychic",
+	"position": [
+		0,
+		10
+	],
+	"scale": 1,
+	"idle_anim": "M Psychic Idle",
+	"confirm_anim": "M Psychic Idle",
+	"antialiasing": true
+}
