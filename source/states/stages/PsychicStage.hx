@@ -156,7 +156,6 @@ class PsychicStage extends BaseStage
 		FlxTween.tween(FlxG.camera, {zoom: 1}, 8, {ease: FlxEase.sineInOut});
 
 		FlxG.camera.follow(camFollowPos, LOCKON, 1);
-		camFollow.set(camFollowPos.x, camFollowPos.y);
 		FlxTween.tween(camFollowPos, {x: boyfriend.getGraphicMidpoint().x, y: boyfriend.getGraphicMidpoint().y - 50}, 6, {ease: FlxEase.circOut});
 		boyfriend.specialAnim = true;
 		gf.stunned = true;
@@ -205,7 +204,7 @@ class PsychicStage extends BaseStage
 			FlxTween.tween(black, {alpha: 1}, 3, {onComplete: function(twn:FlxTween) {
 				fakeBf.visible = false;
 				new FlxTimer().start(1, function(tmr:FlxTimer) {
-					var toBeContinued:Alphabet = new Alphabet(0, 0, "To be continued", true, true, 0.1);
+					var toBeContinued:Alphabet = new Alphabet(0, 0, "To be continued", true, 0.1);
 					toBeContinued.scrollFactor.set();
 					toBeContinued.screenCenter();
 					toBeContinued.x -= 425; //No funny weed number for you
