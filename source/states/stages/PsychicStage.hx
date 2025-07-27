@@ -4,7 +4,7 @@ import states.stages.objects.*;
 import cutscenes.DialogueBox;
 import shaders.WiggleEffect.WiggleEffectType;
 import objects.Note;
-import backend.Achievements;
+import backend.Achievements.AchievementObject;
 
 class PsychicStage extends BaseStage
 {
@@ -25,14 +25,12 @@ class PsychicStage extends BaseStage
 
 	public static var campaignScore:Int = 0;
 	public static var campaignMisses:Int = 0;
-	public static var seenCutscene:Bool = false;
+	public var seenCutscene:Bool = false;
 	public static var deathCounter:Int = 0;
 
 	private var camZooming:Bool = false;
 
-	private var paused:Bool = false;
 	var startedCountdown:Bool = false;
-	var canPause:Bool = true;
 	var limoSpeed:Float = 0;
 
 	override function create()
@@ -64,7 +62,7 @@ class PsychicStage extends BaseStage
 	{
 		var finishCallback:Void->Void = endSong;
 		if(isStoryMode) {
-			switch(SONG.song.toLowerCase()) {
+			switch(PlayState.SONG.song.toLowerCase()) {
 				case 'psychic': {
 					finishCallback = psychicEndSong;
 				}
@@ -140,7 +138,7 @@ class PsychicStage extends BaseStage
 		frontFakeBf.animation.play('idle', true);
 		fakeBf.visible = true;
 		fakeBf.animation.play('idle', true);
-		fakeBf.antialiasing = ClientPrefs.globalAntialiasing;
+		fakeBf.antialiasing = ClientPrefs.data.globalAntialiasing;
 
 		new FlxTimer().start(7.5, function(tmr:FlxTimer) {
 			wiggleShit.setValue(0);
@@ -236,7 +234,7 @@ class PsychicStage extends BaseStage
 			#if !switch
 			var percent:Float = ratingPercent;
 			if(Math.isNaN(percent)) percent = 0;
-			Highscore.saveScore(SONG.song, songScore, storyDifficulty, percent);
+			Highscore.saveScore(PlayState.SONG.song, songScore, storyDifficulty, percent);
 			#end
 		}
 
@@ -282,7 +280,7 @@ class PsychicStage extends BaseStage
 				trace('LOADING NEXT SONG');
 				trace(PlayState.storyPlaylist[0].toLowerCase() + difficulty);
 
-				var winterHorrorlandNext = (SONG.song.toLowerCase() == "eggnog");
+				var winterHorrorlandNext = (PlayState.SONG.song.toLowerCase() == "eggnog");
 				if (winterHorrorlandNext)
 				{
 					var blackShit:FlxSprite = new FlxSprite(-FlxG.width * FlxG.camera.zoom,
@@ -373,17 +371,17 @@ class PsychicStage extends BaseStage
 							}
 						}
 					case 15:
-						if(ClientPrefs.framerate <= 60 && ClientPrefs.lowQuality && !ClientPrefs.globalAntialiasing) {
+						if(ClientPrefs.data.framerate <= 60 && ClientPrefs.data.lowQuality && !ClientPrefs.data.globalAntialiasing) {
 							Achievements.unlockAchievement(arrayIDs[i]);
 							return arrayIDs[i];
 						}
 					case 16:
-						if(SONG.song.toLowerCase() == 'test' && !usedPractice) {
+						if(PlayState.SONG.song.toLowerCase() == 'test' && !usedPractice) {
 							Achievements.unlockAchievement(arrayIDs[i]);
 							return arrayIDs[i];
 						}
 					case 17:
-						if(SONG.song.toLowerCase() == 'late-drive' && !usedPractice) {
+						if(PlayState.SONG.song.toLowerCase() == 'late-drive' && !usedPractice) {
 							Achievements.unlockAchievement(arrayIDs[i]);
 							return arrayIDs[i];
 						}
