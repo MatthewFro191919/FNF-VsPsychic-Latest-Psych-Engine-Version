@@ -32,9 +32,6 @@ enum abstract AchievementOp(String)
 }
 
 class Achievements {
-	public static var achievementsStuff:Array<Dynamic> = [ //Name, Description, Hidden achievement
-		["Freaky on a Friday Night",	"Play on a Friday... Night.",							 true],
-
 	public static function init()
 	{
 		createAchievement('friday_night_play',		{name: "Freaky on a Friday Night", description: "Play on a Friday... Night.", hidden: true});
@@ -72,6 +69,9 @@ class Achievements {
 	public static var variables:Map<String, Float> = [];
 	public static var achievementsUnlocked:Array<String> = [];
 	private static var _firstLoad:Bool = true;
+
+	public static var achievementsStuff:Array<Dynamic> = [ //Name, Description, Hidden achievement
+		["Freaky on a Friday Night",	"Play on a Friday... Night.",							 true],
 
 	public static function get(name:String):Achievement
 		return achievements.get(name);
