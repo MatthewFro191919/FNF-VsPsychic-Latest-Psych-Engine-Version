@@ -54,6 +54,13 @@ class PsychicStage extends BaseStage
 
 	private var camFollowPos:FlxObject;
 
+	public static var storyWeek:Int = 0;
+	public static var storyPlaylist:Array<String> = [];
+	public static var storyDifficulty:Int = 1;
+
+	var ratingString:String;
+	var ratingPercent:Float;
+
 	override function create()
 	{
 				var backwall:BGSprite = new BGSprite('backwall', -490, -580, 0.8, 0.92);
@@ -129,7 +136,6 @@ class PsychicStage extends BaseStage
 		camZooming = false;
 
 		deathCounter = 0;
-		seenCutscene = false;
 		updateTime = false;
 		KillNotes();
 
@@ -220,7 +226,6 @@ class PsychicStage extends BaseStage
 			notes.remove(daNote, true);
 			daNote.destroy();
 		}
-		unspawnNotes = [];
 		psychicNotes = [];
 	}
 
@@ -237,7 +242,6 @@ class PsychicStage extends BaseStage
 		updateTime = false;
 
 		deathCounter = 0;
-		seenCutscene = false;
 		KillNotes();
 
 		if(achievementObj != null) {
@@ -342,72 +346,7 @@ class PsychicStage extends BaseStage
 	}
 	private function checkForAchievement(arrayIDs:Array<Int>):Int {
 		for (i in 0...arrayIDs.length) {
-			if(!Achievements.achievementsUnlocked[arrayIDs[i]][1]) {
-				switch(arrayIDs[i]) {
-					case 1 | 2 | 3 | 4 | 5 | 6 | 7:
-						if(isStoryMode && campaignMisses < 1 && songMisses < 1 && storyPlaylist.length <= 1 && storyWeek == arrayIDs[i] && !changedDifficulty && !usedPractice) {
-							Achievements.unlockAchievement(arrayIDs[i]);
-							return arrayIDs[i];
-						}
-					case 8:
-						if(songMisses < 1 && storyWeek == -99 && !changedDifficulty && !usedPractice) {
-							Achievements.unlockAchievement(arrayIDs[i]);
-							return arrayIDs[i];
-						}
-					case 9:
-						if(ratingPercent < 0.2 && !usedPractice) {
-							Achievements.unlockAchievement(arrayIDs[i]);
-							return arrayIDs[i];
-						}
-					case 10:
-						if(ratingPercent >= 1) {
-							Achievements.unlockAchievement(arrayIDs[i]);
-							return arrayIDs[i];
-						}
-					case 11:
-						if(Achievements.henchmenDeath >= 100) {
-							Achievements.unlockAchievement(arrayIDs[i]);
-							return arrayIDs[i];
-						}
-					case 12:
-						if(boyfriend.holdTimer >= 20 && !practiceMode) {
-							Achievements.unlockAchievement(arrayIDs[i]);
-							return arrayIDs[i];
-						}
-					case 13:
-						if(!boyfriendIdled && !usedPractice) {
-							Achievements.unlockAchievement(arrayIDs[i]);
-							return arrayIDs[i];
-						}
-					case 14:
-						if(!usedPractice) {
-							var howManyPresses:Int = 0;
-							for (j in 0...keysPressed.length) {
-								if(keysPressed[j]) howManyPresses++;
-							}
-
-							if(howManyPresses <= 2) {
-								Achievements.unlockAchievement(arrayIDs[i]);
-								return arrayIDs[i];
-							}
-						}
-					case 15:
-						if(ClientPrefs.data.framerate <= 60 && ClientPrefs.data.lowQuality && !ClientPrefs.data.globalAntialiasing) {
-							Achievements.unlockAchievement(arrayIDs[i]);
-							return arrayIDs[i];
-						}
-					case 16:
-						if(PlayState.SONG.song.toLowerCase() == 'test' && !usedPractice) {
-							Achievements.unlockAchievement(arrayIDs[i]);
-							return arrayIDs[i];
-						}
-					case 17:
-						if(PlayState.SONG.song.toLowerCase() == 'late-drive' && !usedPractice) {
-							Achievements.unlockAchievement(arrayIDs[i]);
-							return arrayIDs[i];
-						}
-				}
-			}
+			//no
 		}
 		return -1;
 	}
