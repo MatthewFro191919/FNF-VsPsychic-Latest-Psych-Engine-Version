@@ -65,7 +65,6 @@ class PsychicStage extends BaseStage
 	private var camAchievement:FlxCamera;
 
 	public static var practiceMode:Bool = false;
-	public static var usedPractice:Bool = false;
 	public static var changedDifficulty:Bool = false;
 
 	private static var prevCamFollowPos:FlxObject;
@@ -203,7 +202,7 @@ class PsychicStage extends BaseStage
 			FlxTween.tween(black, {alpha: 1}, 3, {onComplete: function(twn:FlxTween) {
 				fakeBf.visible = false;
 				new FlxTimer().start(1, function(tmr:FlxTimer) {
-					var toBeContinued:Alphabet = new Alphabet(0, 0, "To be continued", true, 0.1);
+					var toBeContinued:Alphabet = new Alphabet(0, 0, "To be continued", true);
 					toBeContinued.scrollFactor.set();
 					toBeContinued.screenCenter();
 					toBeContinued.x -= 425; //No funny weed number for you
@@ -266,7 +265,6 @@ class PsychicStage extends BaseStage
 				FlxG.switchState(new StoryMenuState());
 
 				FlxG.save.flush();
-				usedPractice = false;
 			}
 			else
 			{
@@ -315,7 +313,6 @@ class PsychicStage extends BaseStage
 			trace('WENT BACK TO FREEPLAY??');
 			FlxG.switchState(new FreeplayState());
 			FlxG.sound.playMusic(Paths.music('freakyMenu'));
-			usedPractice = false;
 			changedDifficulty = false;
 		}
 	}
