@@ -32,6 +32,9 @@ enum abstract AchievementOp(String)
 }
 
 class Achievements {
+	public static var achievementsStuff:Array<Dynamic> = [ //Name, Description, Hidden achievement
+		["Freaky on a Friday Night",	"Play on a Friday... Night.",							 true],
+
 	public static function init()
 	{
 		createAchievement('friday_night_play',		{name: "Freaky on a Friday Night", description: "Play on a Friday... Night.", hidden: true});
@@ -353,7 +356,7 @@ class AchievementObject extends FlxSpriteGroup {
 		achievementIcon.scrollFactor.set();
 		achievementIcon.setGraphicSize(Std.int(achievementIcon.width * (2 / 3)));
 		achievementIcon.updateHitbox();
-		achievementIcon.antialiasing = ClientPrefs.globalAntialiasing;
+		achievementIcon.antialiasing = ClientPrefs.data.globalAntialiasing;
 
 		var achievementName:FlxText = new FlxText(achievementIcon.x + achievementIcon.width + 20, achievementIcon.y + 16, 280, Achievements.achievementsStuff[id][0], 16);
 		achievementName.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, LEFT);
