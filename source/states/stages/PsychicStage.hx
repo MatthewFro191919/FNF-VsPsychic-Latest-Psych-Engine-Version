@@ -2,8 +2,7 @@ package states.stages;
 
 import states.stages.objects.*;
 import cutscenes.DialogueBoxPsych;
-import shaders.WiggleEffect.WiggleEffectType;;
-
+import shaders.WiggleEffect.WiggleEffectType;
 
 class PsychicStage extends BaseStage
 {
