@@ -32,6 +32,27 @@ enum abstract AchievementOp(String)
 }
 
 class Achievements {
+	public static var achievementsStuff:Array<Dynamic> = [ //Name, Description, Hidden achievement
+		["Freaky on a Friday Night",	"Play on a Friday... Night.",							 true],
+		["She Calls Me Daddy Too",		"Beat Week 1 on Hard with no Misses.",					false],
+		["No More Tricks",				"Beat Week 2 on Hard with no Misses.",					false],
+		["Call Me The Hitman",			"Beat Week 3 on Hard with no Misses.",					false],
+		["Lady Killer",					"Beat Week 4 on Hard with no Misses.",					false],
+		["Missless Christmas",			"Beat Week 5 on Hard with no Misses.",					false],
+		["Highscore!!",					"Beat Week 6 on Hard with no Misses.",					false],
+		["You'll Pay For That...",		"Beat Week 7 on Hard with no Misses.",					true],
+		["Psyche",						"Beat Psychic on Hard with no Misses.",					false],
+		["What a Funkin' Disaster!",	"Complete a Song with a rating lower than 20%.",		false],
+		["Perfectionist",				"Complete a Song with a rating of 100%.",				false],
+		["Roadkill Enthusiast",			"Watch the Henchmen die over 100 times.",				false],
+		["Oversinging Much...?",		"Hold down a note for 20 seconds.",						false],
+		["Hyperactive",					"Finish a Song without going Idle.",					false],
+		["Just the Two of Us",			"Finish a Song pressing only two keys.",				false],
+		["Toaster Gamer",				"Have you tried to run the game on a toaster?",			false],
+		["Debugger",					"Beat the \"Test\" Stage from the Chart Editor.",		 true],
+		["Digital ft. Salvati",			"Beat the \"Late Drive\" Stage from the Chart Editor.",	 true]
+	];
+
 	public static function init()
 	{
 		createAchievement('friday_night_play',		{name: "Freaky on a Friday Night", description: "Play on a Friday... Night.", hidden: true});
@@ -69,9 +90,6 @@ class Achievements {
 	public static var variables:Map<String, Float> = [];
 	public static var achievementsUnlocked:Array<String> = [];
 	private static var _firstLoad:Bool = true;
-
-	public static var achievementsStuff:Array<Dynamic> = [ //Name, Description, Hidden achievement
-		["Freaky on a Friday Night",	"Play on a Friday... Night.",							 true],
 
 	public static function get(name:String):Achievement
 		return achievements.get(name);
