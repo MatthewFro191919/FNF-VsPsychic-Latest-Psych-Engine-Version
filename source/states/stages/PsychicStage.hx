@@ -7,6 +7,7 @@ import objects.Note;
 import backend.Achievements.AchievementObject;
 import openfl.filters.ShaderFilter;
 import flixel.ui.FlxBar;
+import flixel.FlxObject;
 
 class PsychicStage extends BaseStage
 {
@@ -41,7 +42,6 @@ class PsychicStage extends BaseStage
 	public var endingSong:Bool = false;
 
 	private var notes:FlxTypedGroup<Note>;
-	private var unspawnNotes:Array<Note> = [];
 	private var psychicNotes:Array<Dynamic> = [];
 
 	var finishTimer:FlxTimer = null;
@@ -52,8 +52,6 @@ class PsychicStage extends BaseStage
 	var fakeBf:FlxSprite;
 	var psychicBlack:FlxSprite;
 
-	// Handles the new epic mega sexy cam code that i've done
-	private var camFollow:FlxPoint;
 	private var camFollowPos:FlxObject;
 
 	override function create()
