@@ -263,8 +263,6 @@ class PsychicStage extends BaseStage
 				FlxG.sound.playMusic(Paths.music('freakyMenu'));
 
 				FlxG.switchState(new StoryMenuState());
-
-				FlxG.save.flush();
 			}
 			else
 			{
