@@ -4,9 +4,9 @@ import states.stages.objects.*;
 import cutscenes.DialogueBoxPsych;
 import shaders.WiggleEffect.WiggleEffectType;;
 
+
 class PsychicStage extends BaseStage
 {
-	var wiggleShit:WiggleEffect = new WiggleEffect();
 	var animatedBGSprite:BGSprite;
 
 	override function create()
@@ -16,9 +16,14 @@ class PsychicStage extends BaseStage
 
 				var floor:BGSprite = new BGSprite('floor', -370, 570, 0.95, 0.98);
 				add(floor);
-		
-				animatedBGSprite = new BGSprite('fireplace', 140, -340, 0.8, 0.92, ['fireplace'], false);
-				add(animatedBGSprite);
+
+				if(!ClientPrefs.data.lowQuality) {
+					animatedBGSprite = new BGSprite('fireplace', 140, -340, 0.8, 0.92, ['fireplace'], false);
+					add(animatedBGSprite);
+				} else {
+					var fireplace:BGSprite = new BGSprite('fireplace_low', 140, -340, 0.8, 0.92);
+					add(fireplace);
+				}
 
 				var chair:BGSprite = new BGSprite('chair', -240, 180, 0.9, 0.96);
 				add(chair);
@@ -26,10 +31,10 @@ class PsychicStage extends BaseStage
 
 	override function beatHit()
 	{
-				if(!ClientPrefs.lowQuality) animatedBGSprite.dance();
+				if(!ClientPrefs.data.lowQuality) animatedBGSprite.dance();
 	}
 
-	override function dialogueIntro(dialogue:Array<String>, ?song:String = '', ?doBlack:Bool = true):Void
+	function dialogueIntro(dialogue:Array<String>, ?song:String = '', ?doBlack:Bool = true):Void
 	{
 		// TO DO: Make this more flexible
 		inCutscene = true;
@@ -46,12 +51,14 @@ class PsychicStage extends BaseStage
 		add(white);
 		add(black);
 
-		if(curStage == 'psychic') {
+		if(curStage == 'psychic' && !ClientPrefs.data.lowQuality) {
 			new FlxTimer().start(Conductor.crochet / 1000, function(tmr:FlxTimer) {
 				animatedBGSprite.dance();
 			}, 5);
 		}
 
+		CoolUtil.precacheSound('dialogue');
+		CoolUtil.precacheSound('dialogueClose');
 		new FlxTimer().start(0.5, function(tmr:FlxTimer) {
 			openSubState(new DialogueBoxPsych(dialogue, song, black, white));
 			DialogueBoxPsych.finishThing = startCountdown;
