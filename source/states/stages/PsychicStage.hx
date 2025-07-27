@@ -257,54 +257,6 @@ class PsychicStage extends BaseStage
 			campaignMisses += songMisses;
 
 			storyPlaylist.remove(storyPlaylist[0]);
-
-			if (storyPlaylist.length <= 0)
-			{
-				FlxG.sound.playMusic(Paths.music('freakyMenu'));
-
-				FlxG.switchState(new StoryMenuState());
-			}
-			else
-			{
-				var difficulty:String = "";
-
-				if (storyDifficulty == 0)
-					difficulty = '-easy';
-
-				if (storyDifficulty == 2)
-					difficulty = '-hard';
-
-				trace('LOADING NEXT SONG');
-				trace(PlayState.storyPlaylist[0].toLowerCase() + difficulty);
-
-				var winterHorrorlandNext = (PlayState.SONG.song.toLowerCase() == "eggnog");
-				if (winterHorrorlandNext)
-				{
-					var blackShit:FlxSprite = new FlxSprite(-FlxG.width * FlxG.camera.zoom,
-						-FlxG.height * FlxG.camera.zoom).makeGraphic(FlxG.width * 3, FlxG.height * 3, FlxColor.BLACK);
-					blackShit.scrollFactor.set();
-					add(blackShit);
-					camHUD.visible = false;
-
-					FlxG.sound.play(Paths.sound('Lights_Shut_off'));
-				}
-
-				FlxTransitionableState.skipNextTransIn = true;
-				FlxTransitionableState.skipNextTransOut = true;
-
-				prevCamFollowPos = camFollowPos;
-
-				PlayState.SONG = Song.loadFromJson(PlayState.storyPlaylist[0].toLowerCase() + difficulty, PlayState.storyPlaylist[0]);
-				FlxG.sound.music.stop();
-
-				if(winterHorrorlandNext) {
-					new FlxTimer().start(1.5, function(tmr:FlxTimer) {
-						LoadingState.loadAndSwitchState(new PlayState());
-					});
-				} else {
-					LoadingState.loadAndSwitchState(new PlayState());
-				}
-			}
 		}
 		else
 		{
