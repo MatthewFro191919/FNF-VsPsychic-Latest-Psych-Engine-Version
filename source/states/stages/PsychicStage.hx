@@ -5,6 +5,7 @@ import cutscenes.DialogueBox;
 import shaders.WiggleEffect;
 import objects.Note;
 import backend.Achievements.AchievementObject;
+import backend.Song;
 import openfl.filters.ShaderFilter;
 import flixel.ui.FlxBar;
 import flixel.FlxObject;
@@ -60,6 +61,15 @@ class PsychicStage extends BaseStage
 
 	var ratingString:String;
 	var ratingPercent:Float;
+
+	private var camAchievement:FlxCamera;
+
+	public static var practiceMode:Bool = false;
+	public static var usedPractice:Bool = false;
+	public static var changedDifficulty:Bool = false;
+
+	private static var prevCamFollow:FlxPoint;
+	private static var prevCamFollowPos:FlxObject;
 
 	override function create()
 	{
@@ -230,7 +240,7 @@ class PsychicStage extends BaseStage
 	}
 
 	var transitioning = false;
-	override function endSong():Void
+	override function endSong():Bool
 	{
 		timeBarBG.visible = false;
 		timeBar.visible = false;
@@ -254,7 +264,7 @@ class PsychicStage extends BaseStage
 			}
 		}
 
-		if (SONG.validScore)
+		if (PlayState.SONG.validScore)
 		{
 			#if !switch
 			var percent:Float = ratingPercent;
@@ -274,20 +284,16 @@ class PsychicStage extends BaseStage
 			{
 				FlxG.sound.playMusic(Paths.music('freakyMenu'));
 
-				transIn = FlxTransitionableState.defaultTransIn;
-				transOut = FlxTransitionableState.defaultTransOut;
+				var transIn:FlxTransitionableState = FlxTransitionableState.defaultTransIn;
+				var transOut:FlxTransitionableState = FlxTransitionableState.defaultTransOut;
 
 				FlxG.switchState(new StoryMenuState());
 
-				// if ()
-				StoryMenuState.weekUnlocked[Std.int(Math.min(storyWeek + 1, StoryMenuState.weekUnlocked.length - 1))] = true;
-
-				if (SONG.validScore)
+				if (PlayState.SONG.validScore)
 				{
 					Highscore.saveWeekScore(storyWeek, campaignScore, storyDifficulty);
 				}
 
-				FlxG.save.data.weekUnlocked = StoryMenuState.weekUnlocked;
 				FlxG.save.flush();
 				usedPractice = false;
 				changedDifficulty = false;
