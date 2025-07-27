@@ -1,7 +1,7 @@
 package states.stages;
 
 import states.stages.objects.*;
-import cutscenes.DialogueBoxPsych;
+import cutscenes.DialogueBox;
 import shaders.WiggleEffect.WiggleEffectType;
 
 class PsychicStage extends BaseStage
@@ -31,5 +31,36 @@ class PsychicStage extends BaseStage
 	override function beatHit()
 	{
 				if(!ClientPrefs.data.lowQuality) animatedBGSprite.dance();
+	}
+
+	var doof:DialogueBox = null;
+	function initDoof()
+	{
+		var file:String = Paths.txt('$songName/${songName}Dialogue_${ClientPrefs.data.language}'); //Checks for vanilla/Senpai dialogue
+		#if MODS_ALLOWED
+		if (!FileSystem.exists(file))
+		#else
+		if (!OpenFlAssets.exists(file))
+		#end
+		{
+			file = Paths.txt('$songName/${songName}Dialogue');
+		}
+
+		#if MODS_ALLOWED
+		if (!FileSystem.exists(file))
+		#else
+		if (!OpenFlAssets.exists(file))
+		#end
+		{
+			startCountdown();
+			return;
+		}
+
+		doof = new DialogueBox(false, CoolUtil.coolTextFile(file));
+		doof.cameras = [camHUD];
+		doof.scrollFactor.set();
+		doof.finishThing = startCountdown;
+		doof.nextDialogueThing = PlayState.instance.startNextDialogue;
+		doof.skipDialogueThing = PlayState.instance.skipDialogue;
 	}
 }
