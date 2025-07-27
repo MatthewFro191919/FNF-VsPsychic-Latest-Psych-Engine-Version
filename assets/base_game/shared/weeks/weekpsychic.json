@@ -1,0 +1,20 @@
+{
+	"songs": [
+		["Psychic", "psychic", [88,7,135]]
+	],
+
+	"weekCharacters": [
+		"",
+		"bf",
+		"gf"
+	],
+	"weekBackground": "fireplace",
+
+	"storyName": "",
+	"weekBefore": "",
+	"weekName": "Mind Games",
+	"startUnlocked": true,
+
+	"hideStoryMode": false,
+	"hideFreeplay": false
+}
