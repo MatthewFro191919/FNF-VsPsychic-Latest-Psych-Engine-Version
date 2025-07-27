@@ -25,7 +25,6 @@ class PsychicStage extends BaseStage
 
 	public static var campaignScore:Int = 0;
 	public static var campaignMisses:Int = 0;
-	public var seenCutscene:Bool = false;
 	public static var deathCounter:Int = 0;
 
 	private var camZooming:Bool = false;
