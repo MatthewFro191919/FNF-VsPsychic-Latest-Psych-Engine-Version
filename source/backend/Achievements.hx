@@ -9,6 +9,8 @@ import haxe.Json;
 import psychlua.FunkinLua;
 #end
 
+import flixel.group.FlxSpriteGroup;
+
 typedef Achievement =
 {
 	var name:String;
