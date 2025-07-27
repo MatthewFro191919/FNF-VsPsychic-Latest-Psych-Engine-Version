@@ -236,43 +236,6 @@ class PsychicStage extends BaseStage
 		psychicNotes = [];
 	}
 
-	var transitioning = false;
-	override function endSong():Bool
-	{
-		timeBarBG.visible = false;
-		timeBar.visible = false;
-		timeTxt.visible = false;
-		canPause = false;
-		endingSong = true;
-		camZooming = false;
-		inCutscene = false;
-		updateTime = false;
-
-		deathCounter = 0;
-		KillNotes();
-
-		if (isStoryMode)
-		{
-			campaignScore += songScore;
-			campaignMisses += songMisses;
-
-			storyPlaylist.remove(storyPlaylist[0]);
-		}
-		else
-		{
-			trace('WENT BACK TO FREEPLAY??');
-			FlxG.switchState(new FreeplayState());
-			FlxG.sound.playMusic(Paths.music('freakyMenu'));
-			changedDifficulty = false;
-		}
-	}
-	private function checkForAchievement(arrayIDs:Array<Int>):Int {
-		for (i in 0...arrayIDs.length) {
-			//no
-		}
-		return -1;
-	}
-
 	var curLight:Int = 0;
 	var curLightEvent:Int = 0;
 }
