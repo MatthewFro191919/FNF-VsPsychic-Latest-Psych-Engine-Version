@@ -4,10 +4,36 @@ import states.stages.objects.*;
 import cutscenes.DialogueBox;
 import shaders.WiggleEffect.WiggleEffectType;
 import objects.Note;
+import backend.Achievements;
 
 class PsychicStage extends BaseStage
 {
 	var animatedBGSprite:BGSprite;
+
+	private var updateTime:Bool = false;
+
+	private var vocals:FlxSound;
+
+	var songPercent:Float = 0;
+
+	var talking:Bool = true;
+	var songScore:Int = 0;
+	var songHits:Int = 0;
+	var songMisses:Int = 0;
+	var scoreTxt:FlxText;
+	var timeTxt:FlxText;
+
+	public static var campaignScore:Int = 0;
+	public static var campaignMisses:Int = 0;
+	public static var seenCutscene:Bool = false;
+	public static var deathCounter:Int = 0;
+
+	private var camZooming:Bool = false;
+
+	private var paused:Bool = false;
+	var startedCountdown:Bool = false;
+	var canPause:Bool = true;
+	var limoSpeed:Float = 0;
 
 	override function create()
 	{
@@ -58,6 +84,13 @@ class PsychicStage extends BaseStage
 		}
 	}
 
+	var achievementObj:AchievementObject = null;
+	function startAchievement(achieve:Int) {
+		achievementObj = new AchievementObject(achieve, camAchievement);
+		achievementObj.onFinish = achievementEnd;
+		add(achievementObj);
+		trace('Giving achievement ' + achieve);
+	}
 	function achievementEnd():Void
 	{
 		achievementObj = null;
