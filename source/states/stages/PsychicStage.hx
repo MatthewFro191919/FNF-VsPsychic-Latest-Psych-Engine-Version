@@ -6,6 +6,7 @@ import shaders.WiggleEffect;
 import objects.Note;
 import backend.Achievements.AchievementObject;
 import openfl.filters.ShaderFilter;
+import flixel.ui.FlxBar;
 
 class PsychicStage extends BaseStage
 {
