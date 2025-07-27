@@ -68,7 +68,6 @@ class PsychicStage extends BaseStage
 	public static var usedPractice:Bool = false;
 	public static var changedDifficulty:Bool = false;
 
-	private static var prevCamFollow:FlxPoint;
 	private static var prevCamFollowPos:FlxObject;
 
 	override function create()
@@ -253,25 +252,6 @@ class PsychicStage extends BaseStage
 		deathCounter = 0;
 		KillNotes();
 
-		if(achievementObj != null) {
-			return;
-		} else {
-			var achieve:Int = checkForAchievement([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 13, 14, 15, 16, 17]);
-			if(achieve > -1) {
-				startAchievement(achieve);
-				return;
-			}
-		}
-
-		if (PlayState.SONG.validScore)
-		{
-			#if !switch
-			var percent:Float = ratingPercent;
-			if(Math.isNaN(percent)) percent = 0;
-			Highscore.saveScore(PlayState.SONG.song, songScore, storyDifficulty, percent);
-			#end
-		}
-
 		if (isStoryMode)
 		{
 			campaignScore += songScore;
@@ -283,19 +263,10 @@ class PsychicStage extends BaseStage
 			{
 				FlxG.sound.playMusic(Paths.music('freakyMenu'));
 
-				var transIn:FlxTransitionableState = FlxTransitionableState.defaultTransIn;
-				var transOut:FlxTransitionableState = FlxTransitionableState.defaultTransOut;
-
 				FlxG.switchState(new StoryMenuState());
-
-				if (PlayState.SONG.validScore)
-				{
-					Highscore.saveWeekScore(storyWeek, campaignScore, storyDifficulty);
-				}
 
 				FlxG.save.flush();
 				usedPractice = false;
-				changedDifficulty = false;
 			}
 			else
 			{
@@ -325,7 +296,6 @@ class PsychicStage extends BaseStage
 				FlxTransitionableState.skipNextTransIn = true;
 				FlxTransitionableState.skipNextTransOut = true;
 
-				prevCamFollow = camFollow;
 				prevCamFollowPos = camFollowPos;
 
 				PlayState.SONG = Song.loadFromJson(PlayState.storyPlaylist[0].toLowerCase() + difficulty, PlayState.storyPlaylist[0]);
