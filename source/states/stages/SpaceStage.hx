@@ -20,7 +20,7 @@ class SpaceStage extends BaseStage
 				asteroid.active = false;
 				add(asteroid);
 
-				if(!ClientPrefs.lowQuality) {
+				if(!ClientPrefs.data.lowQuality) {
 					var voyager:FlxSprite = new FlxSprite(-500, -300).loadGraphic(Paths.image('voyager'));
 					voyager.setGraphicSize(Std.int(voyager.width * 0.9));
 					voyager.updateHitbox();
