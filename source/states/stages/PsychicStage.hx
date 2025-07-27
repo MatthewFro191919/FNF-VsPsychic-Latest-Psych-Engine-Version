@@ -161,7 +161,7 @@ class PsychicStage extends BaseStage
 		frontFakeBf.animation.play('idle', true);
 		fakeBf.visible = true;
 		fakeBf.animation.play('idle', true);
-		fakeBf.antialiasing = ClientPrefs.data.globalAntialiasing;
+		fakeBf.antialiasing = ClientPrefs.data.antialiasing;
 
 		new FlxTimer().start(7.5, function(tmr:FlxTimer) {
 			wiggleShit.setValue(0);
