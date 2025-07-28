@@ -40,8 +40,6 @@ class PsychicStage extends BaseStage
 
 	public var timeBar:FlxBar;
 
-	public var endingSong:Bool = false;
-
 	private var notes:FlxTypedGroup<Note>;
 	private var psychicNotes:Array<Dynamic> = [];
 
@@ -241,7 +239,7 @@ class PsychicStage extends BaseStage
 	override function startSong():Void
 	{
 		if(isStoryMode) {
-			switch(SONG.song.toLowerCase()) {
+			switch(PlayState.SONG.song.toLowerCase()) {
 				case 'psychic': {
 					psychicBlack = new FlxSprite(-200,-200).makeGraphic(FlxG.width * 2, FlxG.height * 2, FlxColor.BLACK);
 					psychicBlack.scrollFactor.set();
