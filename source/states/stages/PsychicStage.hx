@@ -253,7 +253,7 @@ class PsychicStage extends BaseStage
 					frontFakeBf = new FlxSprite(fakeBf.x, fakeBf.y);
 					frontFakeBf.frames = Paths.getSparrowAtlas('BF_Cutscene');
 					frontFakeBf.animation.addByPrefix('idle', 'BF transform', 24, false);
-					frontFakeBf.antialiasing = ClientPrefs.globalAntialiasing;
+					frontFakeBf.antialiasing = ClientPrefs.data.antialiasing;
 					frontFakeBf.visible = false;
 					frontFakeBf.alpha = 0.6;
 					add(frontFakeBf);
