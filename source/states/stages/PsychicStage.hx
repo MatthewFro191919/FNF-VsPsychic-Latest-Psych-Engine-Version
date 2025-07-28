@@ -238,14 +238,6 @@ class PsychicStage extends BaseStage
 		psychicNotes = [];
 	}
 
-	var previousFrameTime:Int = 0;
-	var lastReportedPlayheadPosition:Int = 0;
-	var songTime:Float = 0;
-
-	var frontFakeBf:FlxSprite;
-	var fakeBf:FlxSprite;
-	var psychicBlack:FlxSprite;
-	
 	override function startSong():Void
 	{
 		if(isStoryMode) {
