@@ -64,6 +64,8 @@ class PsychicStage extends BaseStage
 
 	private var camAchievement:FlxCamera;
 
+	private var endingSong:Bool = false;
+	private var startingSong:Bool = false;
 	public static var practiceMode:Bool = false;
 	public static var changedDifficulty:Bool = false;
 
@@ -236,6 +238,38 @@ class PsychicStage extends BaseStage
 		psychicNotes = [];
 	}
 
-	var curLight:Int = 0;
-	var curLightEvent:Int = 0;
+	var previousFrameTime:Int = 0;
+	var lastReportedPlayheadPosition:Int = 0;
+	var songTime:Float = 0;
+
+	var frontFakeBf:FlxSprite;
+	var fakeBf:FlxSprite;
+	var psychicBlack:FlxSprite;
+	
+	override function startSong():Void
+	{
+		if(isStoryMode) {
+			switch(SONG.song.toLowerCase()) {
+				case 'psychic': {
+					psychicBlack = new FlxSprite(-200,-200).makeGraphic(FlxG.width * 2, FlxG.height * 2, FlxColor.BLACK);
+					psychicBlack.scrollFactor.set();
+					psychicBlack.alpha = 0;
+					add(psychicBlack);
+					fakeBf = new FlxSprite(boyfriend.x - 28, boyfriend.y - 23);
+					fakeBf.frames = Paths.getSparrowAtlas('BF_Cutscene');
+					fakeBf.animation.addByPrefix('idle', 'BF transform', 24, false);
+					fakeBf.visible = false;
+					add(fakeBf);
+					frontFakeBf = new FlxSprite(fakeBf.x, fakeBf.y);
+					frontFakeBf.frames = Paths.getSparrowAtlas('BF_Cutscene');
+					frontFakeBf.animation.addByPrefix('idle', 'BF transform', 24, false);
+					frontFakeBf.antialiasing = ClientPrefs.globalAntialiasing;
+					frontFakeBf.visible = false;
+					frontFakeBf.alpha = 0.6;
+					add(frontFakeBf);
+					FlxG.sound.music.onComplete = psychicEndSong;
+				}
+			}
+		}
+	}
 }
