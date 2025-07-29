@@ -158,10 +158,13 @@ class PsychicStage extends BaseStage
 		gf.stunned = true;
 		dad.stunned = true;
 
+		camFrontEffect.follow(camFollowPos, LOCKON, 1);
+		frontFakeBf.cameras = [camFrontEffect];
 		FlxTween.tween(frontFakeBf.scale, {x: 1.2, y: 1.2}, 3.75, {startDelay: 7.5, ease: FlxEase.circOut});
 		FlxTween.tween(frontFakeBf, {alpha: 0}, 3.75, {startDelay: 7.5});
 
 		wiggleShit.effectType = FLAG;
+		camFrontEffect.setFilters([new ShaderFilter(wiggleShit.shader)]);
 
 		boyfriend.visible = false;
 		frontFakeBf.visible = true;
@@ -219,6 +222,14 @@ class PsychicStage extends BaseStage
 	}
 
 	private function KillNotes() {
+		var daNote:Note = notes.members[0];
+		daNote.active = false;
+		daNote.visible = false;
+
+		FlxTween.cancelTweensOf(daNote);
+		daNote.kill();
+		notes.remove(daNote, true);
+		daNote.destroy();
 		psychicNotes = [];
 	}
 
