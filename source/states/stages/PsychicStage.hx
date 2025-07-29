@@ -137,7 +137,6 @@ class PsychicStage extends BaseStage
 	function psychicEndSong():Void //This function will be removed once we add a second song to Psychic's week, as the cutscene will happen at the start of the second song instead of end of the first one
 	{
 		songPercent = 1.0;
-		timeTxt.text = '0:00';
 		inCutscene = true;
 		endingSong = true;
 		canPause = false;
