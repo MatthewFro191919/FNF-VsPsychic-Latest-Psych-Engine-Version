@@ -222,16 +222,6 @@ class PsychicStage extends BaseStage
 	}
 
 	private function KillNotes() {
-		while(notes.length > 0) {
-			var daNote:Note = notes.members[0];
-			daNote.active = false;
-			daNote.visible = false;
-
-			FlxTween.cancelTweensOf(daNote);
-			daNote.kill();
-			notes.remove(daNote, true);
-			daNote.destroy();
-		}
 		psychicNotes = [];
 	}
 
