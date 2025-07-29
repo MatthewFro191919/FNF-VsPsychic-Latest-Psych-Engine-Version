@@ -158,7 +158,6 @@ class PsychicStage extends BaseStage
 		gf.stunned = true;
 		dad.stunned = true;
 
-		camFrontEffect.follow(camFollowPos, LOCKON, 1);
 		frontFakeBf.cameras = [camFrontEffect];
 		FlxTween.tween(frontFakeBf.scale, {x: 1.2, y: 1.2}, 3.75, {startDelay: 7.5, ease: FlxEase.circOut});
 		FlxTween.tween(frontFakeBf, {alpha: 0}, 3.75, {startDelay: 7.5});
